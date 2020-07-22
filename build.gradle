@@ -1,0 +1,36 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id "org.javamodularity.moduleplugin" version "1.6.0"
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '14'
+
+repositories {
+    mavenCentral()
+}
+
+
+configurations {
+    springFactoriesHolder { transitive = false }
+}
+
+dependencies {
+    springFactoriesHolder 'org.springframework.boot:spring-boot-actuator-autoconfigure'
+    springFactoriesHolder 'org.springframework.boot:spring-boot-autoconfigure'
+    springFactoriesHolder 'org.springframework.boot:spring-boot'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        exclude group: 'com.vaadin.external.google', module: 'android-json'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
